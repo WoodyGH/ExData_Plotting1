@@ -9,10 +9,10 @@ all_data <- read.table(FileName, header=TRUE, sep=";", na.string="?")
 sub_data <- subset(all_data, Date == "1/2/2007" | Date == "2/2/2007")
 
 #convert date and time characters to POSIXct
-sub_data <- sub_data %>% mutate(POSIX = as.POSIXct(strptime(paste(Date, Time, sep=" "), format="%d/%m/%Y %H:%M:%S")))
+sub_data <- sub_data %>% mutate(POSIX = as.POSIXct(strptime(paste(Date, Time, sep=" "), format="%d/%m/%Y %H:%M:%S"))) 
 
-#plot histogram of global active power
-with(sub_data, hist(Global_active_power, col="red", xlab="Global Active Power (kilowatts)", main="Global Active Power"))
-dev.copy(png, paste0(FilePath,"plot1.png"))
+#plot line graph of global active power
+with(sub_data, plot(POSIX, Global_active_power, col="black", type="l", xlab="", ylab="Global Active Power (kilowatts)", main=""))
+dev.copy(png, paste0(FilePath,"plot2.png"))
 dev.off()
 
